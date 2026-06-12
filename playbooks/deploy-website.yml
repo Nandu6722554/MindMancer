@@ -1,0 +1,21 @@
+---
+- name: Deploy Website
+  hosts: ubuntu
+  become: true
+
+  tasks:
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Copy Website
+      copy:
+        src: ../files/index.html
+        dest: /var/www/html/index.html
+
+    - name: Ensure Nginx is running
+      shell: |
+        pgrep nginx || nginx

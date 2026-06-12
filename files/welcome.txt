@@ -1,0 +1,6 @@
+Welcome to Ansible
+
+This file is copied using the Ansible Copy Module.
+
+Created by:
+Nandu

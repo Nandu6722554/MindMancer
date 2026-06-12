@@ -1,0 +1,28 @@
+---
+- name: Variables Demo
+  hosts: ubuntu
+  become: true
+
+  vars:
+    app_dir: /opt/myapp
+    file_name: welcome.txt
+
+  tasks:
+
+    - name: Create application directory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+
+    - name: Copy welcome file
+      copy:
+        src: ../files/welcome.txt
+        dest: "{{ app_dir }}/{{ file_name }}"
+
+    - name: Display file
+      command: cat {{ app_dir }}/{{ file_name }}
+      register: output
+
+    - name: Show output
+      debug:
+        var: output.stdout

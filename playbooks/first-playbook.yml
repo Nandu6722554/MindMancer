@@ -1,0 +1,24 @@
+---
+- name: My First Ansible Playbook
+  hosts: ubuntu
+  become: true
+
+  tasks:
+
+    - name: Create Demo Directory
+      file:
+        path: /opt/demo
+        state: directory
+
+    - name: Copy Welcome File
+      copy:
+        src: ../files/welcome.txt
+        dest: /opt/demo/welcome.txt
+
+    - name: Display File
+      command: cat /opt/demo/welcome.txt
+      register: output
+
+    - name: Print Output
+      debug:
+        var: output.stdout
